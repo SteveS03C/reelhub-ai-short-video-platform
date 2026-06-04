@@ -1,0 +1,24 @@
+<view class="page">
+  <view class="hero">
+    <image class="login-img" src="../resource/images/tm.jpg"></image>
+    <view class="mask"></view>
+    <view class="hero-text">
+      <view class="title">欢迎回来</view>
+      <view class="sub-title">登录后继续你的短视频创作</view>
+    </view>
+  </view>
+  <view class="login-form">
+    <form bindsubmit='doLogin'>
+      <view class="inputView">
+        <image class="icon" src="../resource/images/username.png"></image>
+        <input name="username" class="inputText" placeholder="请输入账号" value="{{username}}" />
+      </view>
+      <view class="inputView">
+        <image class="icon" src="../resource/images/password.png"></image>
+        <input name="password" class="inputText" password="true" placeholder="请输入密码" value="{{password}}" />
+      </view>
+      <button class="loginBtn" form-type='submit'>立即登录</button>
+      <button class="goLoginBtn" bindtap="goRegist">没有账号？去注册</button>
+    </form>
+  </view>
+</view>

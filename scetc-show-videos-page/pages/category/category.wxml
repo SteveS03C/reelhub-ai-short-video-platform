@@ -1,0 +1,22 @@
+<view class="category-page">
+  <view class="section-head">
+    <text class="section-title">推荐频道</text>
+    <text class="section-desc">精选视觉主题，进入你感兴趣的内容宇宙</text>
+  </view>
+
+  <view class="card-list">
+    <view class="channel-card" wx:for="{{categoryInfo}}" wx:key="id" bindtap="jump" data-id="{{item.label}}">
+      <image class="card-image" mode="aspectFill" src="{{item.imageUrl}}"></image>
+      <view class="card-mask"></view>
+      <view class="card-badge" style="background: {{item.accent}};">{{item.badge}}</view>
+      <view class="card-content">
+        <text class="card-title">{{item.name}}</text>
+        <text class="card-desc">{{item.content}}</text>
+        <view class="card-footer">
+          <text class="card-stats">{{item.stats}}</text>
+          <view class="card-button">进入频道</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

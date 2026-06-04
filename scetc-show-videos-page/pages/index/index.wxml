@@ -1,0 +1,14 @@
+<view >
+<view wx:for="{{videoList}}" wx:key="{{item.id}}" class="item-container">
+  <view style='width:{{screenWidth}}px;height:210px;' class='back-img'>
+    <image src="{{item.coverPath}}" style='width:{{screenWidth}}px;height:210px;' mode="aspectFit" bindtap='showVideoInfo' data-arrindex='{{index}}'></image>
+  </view>
+  <view class="desc">
+    <view class="faceName">
+      <image class='myface' src="{{item.face_image}}"></image>
+      <view class="nickname">{{item.nickName}}</view>
+      <view class="title">{{item.videoDesc || '分享精彩瞬间'}}</view>
+    </view>
+  </view>
+</view>
+</view>

@@ -1,0 +1,92 @@
+<view class="page">
+  <view class="hero">
+    <view class="hero-overlay"></view>
+    <view class="profile-card">
+      <view class="profile-top">
+        <image src="{{faceUrl}}" class="face" bindtap="changeFace"></image>
+        <view class="profile-meta">
+          <text class="nickname">{{nickname || '未设置昵称'}}</text>
+          <text class="username">账号：{{username || '未绑定'}}</text>
+          <text class="profile-tip">{{isMe ? '点击头像可以更换封面形象' : '在这里查看 TA 的个人主页'}}</text>
+        </view>
+      </view>
+
+      <view class="stats-row">
+        <view class="stat-item">
+          <text class="stat-num">{{fansCounts}}</text>
+          <text class="stat-label">粉丝</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-num">{{followCounts}}</text>
+          <text class="stat-label">关注</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-num">{{receiveLikeCounts}}</text>
+          <text class="stat-label">获赞</text>
+        </view>
+      </view>
+
+      <block wx:if="{{isMe}}">
+        <view class="action-grid">
+          <view class="action-card primary-card" bindtap="uploadVideo">
+            <text class="action-title">上传作品</text>
+            <text class="action-desc">发布你的短视频灵感</text>
+          </view>
+          <view class="action-card ghost-card" bindtap="clearUserInfo">
+            <text class="action-title">清除本地数据</text>
+            <text class="action-desc">重置缓存与本地记录</text>
+          </view>
+        </view>
+
+        <view class="privacy-panel" bindtap="setLikedListPublic">
+          <view class="privacy-copy">
+            <text class="privacy-title">点赞列表可见性</text>
+            <text class="privacy-desc">{{isLikedListPublic ? '当前为公开状态，其他用户可查看' : '当前为私密状态，仅自己可查看'}}</text>
+          </view>
+          <view class="switch {{isLikedListPublic ? 'switch-on' : 'switch-off'}}">
+            <view class="switch-handle {{isLikedListPublic ? 'switch-handle-on' : 'switch-handle-off'}}"></view>
+          </view>
+        </view>
+
+        <button class="logout-btn" bindtap="logout">退出当前账号</button>
+      </block>
+
+      <block wx:if="{{!isMe}}">
+        <button wx:if="{{!isFollowed}}" class="follow-btn" bindtap="followMe">关注 TA</button>
+        <button wx:else class="follow-btn followed" bindtap="UnfollowMe">已关注</button>
+      </block>
+    </view>
+  </view>
+
+  <view class="content-card">
+    <view class="section-head">
+      <view>
+        <text class="section-title">{{isMe ? '作品中心' : 'TA 的内容'}}</text>
+        <text class="section-subtitle">{{activeTab === 'publish' ? '展示发布过的视频作品' : '展示点赞收藏的视频内容'}}</text>
+      </view>
+    </view>
+
+    <view class="tabs">
+      <view class="tab {{activeTab === 'publish' ? 'tab-active' : ''}}" bindtap="switchTab" data-tab="publish">
+        {{isMe ? '我的发布' : 'TA 的发布'}}
+      </view>
+      <view class="tab {{activeTab === 'liked' ? 'tab-active' : ''}}" bindtap="switchTab" data-tab="liked">
+        {{isMe ? '我的点赞' : 'TA 的点赞'}}
+      </view>
+    </view>
+
+    <view class="video-grid" wx:if="{{videoList.length > 0}}">
+      <view class="video-card" wx:for="{{videoList}}" wx:key="id" bindtap="showVideoInfo" data-arrindex="{{index}}">
+        <image class="video-cover" src="{{item.coverPath}}"></image>
+        <view class="video-mask">
+          <text class="video-tag">{{activeTab === 'publish' ? '作品' : '点赞'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-card" wx:else>
+      <text class="empty-title">这里还没有内容</text>
+      <text class="empty-desc">{{activeTab === 'publish' ? '去上传第一条作品，打造你的个人主页吧。' : '喜欢的视频会出现在这里。'}}</text>
+    </view>
+  </view>
+</view>

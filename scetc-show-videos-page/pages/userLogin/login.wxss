@@ -1,0 +1,94 @@
+page {
+  background: #f4f7fd;
+}
+
+.page {
+  min-height: 100vh;
+}
+
+.hero {
+  position: relative;
+  height: 360rpx;
+  overflow: hidden;
+}
+
+.login-img {
+  width: 750rpx;
+  height: 360rpx;
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(20, 40, 90, 0.25), rgba(20, 40, 90, 0.75));
+}
+
+.hero-text {
+  position: absolute;
+  left: 44rpx;
+  bottom: 36rpx;
+  color: #fff;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: 700;
+}
+
+.sub-title {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  opacity: 0.92;
+}
+
+.login-form {
+  width: 670rpx;
+  margin: -30rpx auto 0 auto;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 28rpx;
+  box-shadow: 0 14rpx 36rpx rgba(27, 63, 120, 0.12);
+}
+
+.inputView {
+  height: 88rpx;
+  border: 2rpx solid #e6ecf7;
+  border-radius: 14rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  margin-bottom: 18rpx;
+}
+
+.icon {
+  width: 32rpx;
+  height: 32rpx;
+  opacity: 0.75;
+}
+
+.inputText {
+  flex: 1;
+  margin-left: 18rpx;
+  font-size: 28rpx;
+}
+
+.loginBtn {
+  width: 100%;
+  margin-top: 20rpx;
+  background: linear-gradient(135deg, #317dff, #5f4bff);
+  color: #fff;
+  border-radius: 44rpx;
+  font-size: 30rpx;
+}
+
+.goLoginBtn {
+  width: 100%;
+  margin-top: 14rpx;
+  border-radius: 44rpx;
+  background: #eef3ff;
+  color: #2f54eb;
+  font-size: 28rpx;
+}

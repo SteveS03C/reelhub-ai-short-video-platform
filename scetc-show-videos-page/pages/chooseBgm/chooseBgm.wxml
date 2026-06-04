@@ -1,0 +1,67 @@
+<view class="page">
+  <view class="page-title">添加背景音乐</view>
+
+  <view class="uploadBgmBar">
+    <button class="uploadBgmBtn" type="default" bindtap="chooseUserBgm" form-type="button">上传自己的BGM</button>
+  </view>
+
+  <view class="bgm-panel">
+    <view class="bgm-panel-head">
+      <text class="bgm-panel-title">背景音乐</text>
+      <text class="bgm-panel-tip">可选，也可以直接上传原声视频</text>
+    </view>
+
+    <view class="bgm-origin {{selectedBgmId === '' ? 'bgm-origin-active' : ''}}" bindtap="clearSelectedBgm">
+      <text class="bgm-origin-title">原声直传</text>
+      <text class="bgm-origin-desc">不使用背景音乐，保留视频原声</text>
+    </view>
+
+    <scroll-view class="bgm-scroll" scroll-y wx:if="{{bgmList && bgmList.length > 0}}">
+      <block wx:for="{{bgmList}}" wx:key="id">
+        <view class="bgm-item {{item.checked ? 'bgm-item-active' : ''}}" bindtap="toggleBgm" data-id="{{item.id}}" data-path="{{item.path}}">
+          <view class="bgm-play {{playingBgmId == item.id ? 'bgm-play-active' : ''}}">
+            <text>{{playingBgmId == item.id ? '暂停' : '试听'}}</text>
+          </view>
+          <view class="bgm-content">
+            <text class="bgm-name">{{item.name}}</text>
+            <text class="bgm-author">{{item.author || '系统BGM'}}</text>
+          </view>
+          <view class="bgm-meta">
+            <text class="bgm-time">{{item.durationText}}</text>
+            <view class="bgm-check {{item.checked ? 'bgm-check-active' : ''}}"></view>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+
+    <view class="bgm-empty" wx:else>暂无可选背景音乐，您可以直接上传视频</view>
+  </view>
+
+  <form bindsubmit="upload" bindreset="resetFormState">
+    <view class="inputView inputView-column">
+      <view class="field-head">
+        <label class="loginLabel">视频描述</label>
+        <text class="field-tip">说点什么吧</text>
+      </view>
+      <input name="desc" class="inputText" placeholder="给视频写一句介绍" />
+    </view>
+
+    <view class="inputView inputView-column">
+      <view class="field-head">
+        <label class="loginLabel">分类选择</label>
+        <text class="field-tip">请选择一个频道</text>
+      </view>
+      <radio-group class="category-group" bindchange="categoryChange">
+        <label class="category-radio {{item.checked ? 'checked' : ''}}" wx:for="{{items}}" wx:key="name">
+          <radio value="{{item.name}}" checked="{{item.checked}}" />
+          <text class="category-text">{{item.value}}</text>
+        </label>
+      </radio-group>
+    </view>
+
+    <view class="action-btns">
+      <button class="gobackBtn" type="warn" form-type="reset">重置</button>
+      <button class="submitBtn" type="primary" form-type="submit">上传视频</button>
+    </view>
+  </form>
+</view>

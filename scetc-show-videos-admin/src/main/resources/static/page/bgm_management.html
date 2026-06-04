@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReelHub后台管理平台-背景音乐</title>
+<meta name="keywords" content="ReelHub后台管理平台">
+<meta name="description" content="ReelHub后台管理平台欢迎您的到来">
+<link rel="shortcut icon" href="favicon.ico">
+<link href="../css/github-gist.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/font-awesome.css" rel="stylesheet">
+<link href="../css/plugins/bootstrap-table/bootstrap-table.min.css"
+	rel="stylesheet">
+<link href="../css/animate.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<link href="../css/index.css" rel="stylesheet">
+<link href="../css/base.css" rel="stylesheet">
+<link href="../css/fakeLoader.css" rel="stylesheet">
+<link href="../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+<style>
+.news_infos span {
+	font-size: 13px;
+}
+
+#toolbar {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 10px;
+	padding: 12px 0 18px;
+}
+
+#toolbar .btn {
+	border-radius: 999px;
+	padding: 8px 18px;
+	font-weight: 600;
+	box-shadow: none;
+}
+
+#toolbar .btn i {
+	margin-right: 6px;
+}
+
+#typeButton {
+	border-color: #4c84ff;
+	color: #4c84ff;
+	background: #f4f8ff;
+}
+
+#triggerUpload {
+	background: linear-gradient(135deg, #3f8cff, #6b5cff);
+	border: none;
+	color: #fff;
+	padding: 8px 20px;
+	box-shadow: 0 10px 22px rgba(76, 132, 255, 0.28);
+	border-radius: 4px;
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 1.5;
+	font-size: 14px;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+}
+
+#triggerUpload:hover,
+#triggerUpload:focus {
+	color: #fff;
+	background: linear-gradient(135deg, #377ff0, #5d4ff0);
+}
+
+#toolbar .btn-danger {
+	box-shadow: 0 8px 18px rgba(242, 99, 123, 0.2);
+}
+
+#picker {
+	position: absolute;
+	left: -9999px;
+	top: -9999px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+#thelist {
+	display: none;
+}
+</style>
+</head>
+
+<body class="white-bg" style="opacity: 0">
+	<div id="fakeloader"></div>
+	<div class="wrapper wrapper-content">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h5>背景音乐管理</h5>
+				<div class="ibox-tools">
+					<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+					</a> <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i
+						class="fa fa-wrench"></i>
+					</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li><a href="#">选项1</a></li>
+						<li><a href="#">选项2</a></li>
+					</ul>
+					<a class="close-link"> <i class="fa fa-times"></i>
+					</a>
+				</div>
+			</div>
+			<div class="ibox-content">
+				<div class="row row-lg">
+					<div class="example">
+						<table id="allBgm" data-mobile-responsive="true">
+ 
+						</table>
+						<div id="toolbar">
+							<button class="type btn btn-outline btn-primary" type="button"
+								id="typeButton" value="5">全部</button>
+       
+							<div style="display:inline-block; vertical-align:middle; margin-right:10px;">
+								<div id="triggerUpload"><i class="fa fa-music"></i> 选择音频并上传</div>
+							</div>
+							<button class=" btn btn-danger" type="button"
+								onclick="getSelectRows(1)">
+								<i class="fa fa-remove"></i> 删除
+							</button>
+							<div id="uploader" class="wu-example">
+								<div id="thelist" class="uploader-list" style="display:none;"></div>
+								<div class="btns">
+								<div id="picker">选择文件</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog"
+					aria-hidden="true">
+					<div class="modal-dialog" style="width: 702px">
+						<div class="modal-content animated fadeInUp">
+							<button type="button" class="close" style="margin-right: 7px"
+								data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<div class="infos" style="margin: 0px;">
+								<div class="newsview" style="padding-top: 0px;">
+									<h3 class="news_title"></h3>
+									<div class="news_author">
+										<span class="au01">信息苏</span><span class="au02"></span><span
+											class="au03">共<b></b>人围观
+										</span>
+									</div>
+									<div class="tags"></div>
+									<div class="news_about">
+										<strong>简介</strong><span class="news_intr"> </span>
+									</div>
+									<div class="news_infos"></div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<span class="update"></span>
+								<button type="button" class="btn btn-primary"
+									data-dismiss="modal">关闭</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="modal-form" class="modal fade" aria-hidden="true">
+		<div class="modal-dialog" style="width: 25%;">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<h3 class="m-t-none m-b">修改资源信息</h3>
+
+						<form role="form" class="form-horizontal" >
+							<div class="input-group m-b">
+								<span class="input-group-addon">名称</span> <input type="text"
+									id="newTitle" class="form-control" >
+							</div>
+							<div class="input-group m-b">
+								<span class="input-group-addon">内容</span>
+								<textarea id="newContent" class="form-control" ></textarea>
+							</div>
+							<div class="input-group m-b">
+								<span class="input-group-addon">链接</span> <input type="text"
+									id="newLink" class="form-control " >
+							</div>
+							<div class="input-group m-b">
+								<span class="input-group-addon">密码</span> <input type="text"
+									id="newPassword" class="form-control">
+							</div>
+
+							<div id="update"></div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/webuploader.js"></script>
+	<script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script
+		src="../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	<script
+		src="../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../js/highlight.pack.js"></script>
+	<script>
+		hljs.initHighlightingOnLoad();
+	</script>
+	<script src="../js/bootstrap.min.js"></script>
+	<!-- 自定义js -->
+	<script src="../js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="../js/contabs.js"></script>
+	<script src="../js/fakeLoader.min.js"></script>
+	<script src="../js/bgm/bgmTable.js"></script>
+	<script src="../js/content.js"></script>
+	<script
+		src="../js/plugins/validate/jquery.validate.min.js"></script>
+	<script
+		src="../js/plugins/validate/messages_zh.min.js"></script>
+
+
+	<!-- Bootstrap table -->
+	<script type="text/javascript">
+		$(function() {
+			var hasAcceptedResponse = false;
+
+			function redirectToLogin() {
+				swal({
+					title : "登录已失效",
+					text : "请重新登录后台后再上传BGM",
+					type : "warning"
+				}, function() {
+					window.top.location.href = "../../adminUser/login";
+				});
+			}
+
+			function looksLikeLoginPage(response) {
+				if (!response) {
+					return false;
+				}
+				if (typeof response === "string") {
+					return response.indexOf("后台管理系统 - 登录") > -1
+						|| response.indexOf("adminUser/login") > -1
+						|| response.indexOf("<html") > -1;
+				}
+				return false;
+			}
+
+			$.ajax({
+				url : "../../bgm/selectBgmList",
+				type : "POST",
+				data : {
+					page : 1,
+					pageSize : 1
+				},
+				success : function(res) {
+					if (looksLikeLoginPage(res)) {
+						redirectToLogin();
+					}
+				},
+				error : function(xhr) {
+					if (xhr && xhr.responseText && looksLikeLoginPage(xhr.responseText)) {
+						redirectToLogin();
+					}
+				}
+			});
+
+			var uploader = WebUploader.create({
+				swf : '../js/Uploader.swf',
+				server : '../../bgm/addSubmit.do',
+				pick : {
+					id : '#picker',
+					multiple : false
+				},
+				resize : false,
+				auto: false,
+				chunked : false,
+				fileSingleSizeLimit : 50 * 1024 * 1024,
+                accept: {
+                    title: '音频文件',
+                    extensions: 'mp3',
+                    mimeTypes: 'audio/*'
+                }
+			});
+			uploader.on('error', function(type) {
+				if (type === 'Q_TYPE_DENIED') {
+					swal("仅支持mp3", "请重新选择 mp3 格式的音频文件", "warning");
+					return;
+				}
+				if (type === 'F_EXCEED_SIZE') {
+					swal("文件过大", "后台当前限制单个 BGM 不能超过 50MB", "warning");
+					return;
+				}
+				swal("上传失败", "文件校验未通过，请重新选择文件", "error");
+			});
+			$("#triggerUpload").on("click", function() {
+				var input = $("#picker").find("input[type='file']");
+				if (input.length) {
+					input.trigger("click");
+				}
+			});
+			uploader.on('fileQueued', function(file) {
+				hasAcceptedResponse = false;
+				if (file.ext !== 'mp3') {
+					swal("仅支持mp3", "请重新选择mp3文件", "warning");
+					uploader.removeFile(file, true);
+					return;
+				}
+				swal("开始上传", "正在上传: " + file.name, "info");
+				uploader.upload(file);
+			});
+
+			uploader.on('uploadSuccess', function(file, response) {
+				if (looksLikeLoginPage(response)) {
+					redirectToLogin();
+				}
+			});
+
+			uploader.on('uploadError', function(file, reason) {
+				if (hasAcceptedResponse) {
+					return;
+				}
+				swal("上传失败", reason || "文件上传出错，请重试", "error");
+			});
+
+			uploader.on('uploadAccept', function(file, response) {
+				if (typeof response === "string") {
+					try {
+						response = JSON.parse(response);
+					} catch (e) {}
+				}
+				if (looksLikeLoginPage(response)) {
+					redirectToLogin();
+					return false;
+				}
+				if (!response || response.status !== 200) {
+					swal("上传失败", response && response.msg ? response.msg : "服务器处理失败", "error");
+					return false;
+				}
+				hasAcceptedResponse = true;
+				var count = response.data && response.data.successCount ? response.data.successCount : 1;
+				var detail = "成功入库 " + count + " 条BGM记录";
+				if (response.data && response.data.insertedId) {
+					detail += "\nID: " + response.data.insertedId + "\n名称: " + response.data.insertedName;
+				}
+				swal("上传成功", detail, "success");
+				return true;
+			});
+
+			uploader.on('uploadComplete', function(file) {
+				uploader.removeFile(file, true);
+				$(".search input").val("");
+				$("#allBgm").bootstrapTable('refresh');
+				hasAcceptedResponse = false;
+			});
+		});
+	</script>
+</body>
+</html>

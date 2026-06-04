@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台管理平台-主页</title>
+    <link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet"/>
+    <link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet"/>
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <style>
+        .stats-card {
+            border-radius: 12px;
+            color: #fff;
+            min-height: 140px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+            border: none;
+        }
+        .stats-card .ibox-title {
+            background: transparent;
+            border: none;
+            padding-bottom: 0;
+        }
+        .stats-card .ibox-title h5 {
+            color: rgba(255, 255, 255, 0.88);
+            font-size: 15px;
+        }
+        .stats-card .ibox-content {
+            background: transparent;
+            border: none;
+        }
+        .stats-num {
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .gradient-purple { background: linear-gradient(135deg, #5b4bff, #8f5cff); }
+        .gradient-blue { background: linear-gradient(135deg, #0f6bff, #31b6ff); }
+        .gradient-green { background: linear-gradient(135deg, #00a578, #31d296); }
+        .gradient-orange { background: linear-gradient(135deg, #ff7a18, #ffb347); }
+        .gradient-red { background: linear-gradient(135deg, #ef476f, #ff7f9f); }
+        .meta-text { color: rgba(255, 255, 255, 0.82); }
+        .status-tip {
+            margin-bottom: 18px;
+            border-radius: 10px;
+            border: 0;
+            background: #eef4ff;
+            color: #2f54eb;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInUp">
+    <div class="alert status-tip">
+        首页数据全部来自数据库实时统计，不再使用演示数据。
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="ibox stats-card gradient-purple">
+                <div class="ibox-title">
+                    <h5>平台访问互动量</h5>
+                </div>
+                <div class="ibox-content">
+                    <div id="visitCount" class="stats-num">0</div>
+                    <small class="meta-text">按视频点赞总量统计</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="ibox stats-card gradient-blue">
+                <div class="ibox-title">
+                    <h5>视频总数</h5>
+                </div>
+                <div class="ibox-content">
+                    <div id="videoCount" class="stats-num">0</div>
+                    <small class="meta-text">当前已发布视频</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="ibox stats-card gradient-green">
+                <div class="ibox-title">
+                    <h5>用户总数</h5>
+                </div>
+                <div class="ibox-content">
+                    <div id="userCount" class="stats-num">0</div>
+                    <small class="meta-text">注册用户总量</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="ibox stats-card gradient-orange">
+                <div class="ibox-title">
+                    <h5>30天活跃用户</h5>
+                </div>
+                <div class="ibox-content">
+                    <div id="activeUserCount" class="stats-num">0</div>
+                    <small class="meta-text">近30天有发视频行为的用户</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="ibox stats-card gradient-red">
+                <div class="ibox-title">
+                    <h5>背景音乐数量</h5>
+                </div>
+                <div class="ibox-content">
+                    <div id="bgmCount" class="stats-num">0</div>
+                    <small class="meta-text">当前可用BGM总量</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="ibox stats-card gradient-blue">
+                <div class="ibox-title">
+                    <h5>待处理举报</h5>
+                </div>
+                <div class="ibox-content">
+                    <div id="pendingReports" class="stats-num">0</div>
+                    <small class="meta-text">举报工单待处理数量</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/bootstrap.min.js?v=3.3.6"></script>
+<script>
+    function formatNum(value) {
+        var num = Number(value || 0);
+        return num.toLocaleString();
+    }
+
+    function loadStats() {
+        $.ajax({
+            url: "../../init",
+            method: "get",
+            dataType: "json",
+            success: function (res) {
+                if (res && res.status === 200 && res.data) {
+                    $("#visitCount").text(formatNum(res.data.visitCount));
+                    $("#videoCount").text(formatNum(res.data.videoCount));
+                    $("#userCount").text(formatNum(res.data.userCount));
+                    $("#activeUserCount").text(formatNum(res.data.activeUserCount));
+                    $("#bgmCount").text(formatNum(res.data.bgmCount));
+                    $("#pendingReports").text(formatNum(res.data.pendingReports));
+                }
+            }
+        });
+    }
+
+    $(function () {
+        loadStats();
+    });
+</script>
+</body>
+</html>
+

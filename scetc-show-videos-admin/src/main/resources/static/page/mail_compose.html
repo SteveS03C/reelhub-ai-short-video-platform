@@ -1,0 +1,514 @@
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
+<html>
+
+
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>ReelHub后台管理平台-邮箱</title>
+<meta name="keywords" content="ReelHub后台管理平台">
+<meta name="description" content="ReelHub后台管理平台欢迎您的到来">
+<link rel="shortcut icon" href="favicon.ico">
+<link href="../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="../css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="../css/plugins/summernote/summernote.css" rel="stylesheet">
+<link href="../css/plugins/summernote/summernote-bs3.css"
+	rel="stylesheet">
+<link href="../css/animate.min.css" rel="stylesheet">
+<link href="../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<style>
+	.mail-config-box { margin-bottom: 14px; border-radius: 10px; border: 1px solid #e8eef8; background: #f9fbff; padding: 12px; }
+	.mail-config-box .form-control { margin-bottom: 8px; }
+	.mail-status { margin-top: 8px; display: none; }
+</style>
+
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content">
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content mailbox-content">
+						<div class="file-manager">
+							<a class="btn btn-block btn-primary compose-mail"
+								href="mail_compose.html">写信</a>
+							<div class="space-25"></div>
+							<h5>文件夹</h5>
+							<ul class="folder-list m-b-md" style="padding: 0">
+						<li><a href="#" onclick="showFolder('收件箱')"> <i class="fa fa-inbox "></i>
+							收件箱 <span class="label label-warning pull-right">16</span>
+						</a></li>
+						<li><a href="#" onclick="showFolder('发信')"> <i class="fa fa-envelope-o"></i>
+							发信
+						</a></li>
+						<li><a href="#" onclick="showFolder('重要')"> <i
+								class="fa fa-certificate"></i> 重要
+						</a></li>
+						<li><a href="#" onclick="showFolder('草稿')"> <i
+								class="fa fa-file-text-o"></i> 草稿 <span
+								class="label label-danger pull-right">2</span>
+						</a></li>
+						<li><a href="#" onclick="showFolder('垃圾箱')"> <i class="fa fa-trash-o"></i>
+							垃圾箱
+						</a></li>
+					</ul>
+							<h5>分类</h5>
+							<ul class="category-list" style="padding: 0">
+								<li><a href="mail_compose.html"> <i
+										class="fa fa-circle text-navy"></i> 工作
+								</a></li>
+								<li><a href="mail_compose.html"> <i
+										class="fa fa-circle text-danger"></i> 文档
+								</a></li>
+								<li><a href="mail_compose.html"> <i
+										class="fa fa-circle text-primary"></i> 社交
+								</a></li>
+								<li><a href="mail_compose.html"> <i
+										class="fa fa-circle text-info"></i> 广告
+								</a></li>
+								<li><a href="mail_compose.html"> <i
+										class="fa fa-circle text-warning"></i> 客户端
+								</a></li>
+							</ul>
+
+							<h5 class="tag-title">标签</h5>
+							<ul class="tag-list" style="padding: 0">
+								<li><a href="mail_compose.html"><i class="fa fa-tag"></i>
+										朋友</a></li>
+								<li><a href="mail_compose.html"><i class="fa fa-tag"></i>
+										工作</a></li>
+								<li><a href="mail_compose.html"><i class="fa fa-tag"></i>
+										家庭</a></li>
+								<li><a href="mail_compose.html"><i class="fa fa-tag"></i>
+										孩子</a></li>
+								<li><a href="mail_compose.html"><i class="fa fa-tag"></i>
+										假期</a></li>
+								<li><a href="mail_compose.html"><i class="fa fa-tag"></i>
+										音乐</a></li>
+								<li><a href="mail_compose.html"><i class="fa fa-tag"></i>
+										照片</a></li>
+								<li><a href="mail_compose.html"><i class="fa fa-tag"></i>
+										电影</a></li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-9 animated fadeInRight">
+				<div class="mail-box-header">
+					<div class="mail-config-box">
+						<div class="row">
+							<div class="col-sm-3"><input id="smtpServer" type="text" class="form-control" placeholder="SMTP地址 如 smtp.qq.com:465"></div>
+							<div class="col-sm-3"><input id="smtpUsername" type="text" class="form-control" placeholder="SMTP账号"></div>
+							<div class="col-sm-2"><input id="smtpPassword" type="password" class="form-control" placeholder="SMTP授权码"></div>
+							<div class="col-sm-3"><input id="smtpFrom" type="text" class="form-control" placeholder="发件人邮箱"></div>
+							<div class="col-sm-1"><button type="button" class="btn btn-info btn-sm btn-block" onclick="saveEmailConfig()">保存</button></div>
+						</div>
+						<div id="mailStatus" class="alert mail-status"></div>
+					</div>
+					<div class="pull-right tooltip-demo">
+						<a href="javascript:void(0);" onclick="saveDraft()" class="btn btn-white btn-sm"
+							data-toggle="tooltip" data-placement="top" title="存为草稿"><i
+							class="fa fa-pencil"></i> 存为草稿</a> <a href="mail_compose.html"
+							class="btn btn-danger btn-sm" data-toggle="tooltip"
+							data-placement="top" title="放弃"><i class="fa fa-times"></i>
+							放弃</a>
+					</div>
+					<h2>写信</h2>
+				</div>
+				<div class="mail-box">
+
+
+					<div class="mail-body">
+						<form id="mailForm" class="form-horizontal" method="post"
+							action="javascript:void(0);">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">发送到：</label>
+
+								<div class="col-sm-10">
+									<input type="text" id="to" class="form-control"
+										value="xx@163.com">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">主题：</label>
+
+								<div class="col-sm-10">
+									<input id="subject" name="subject" type="text"
+										class="form-control" value="">
+								</div>
+							</div>
+						</form>
+
+					</div>
+
+					<div class="mail-text h-200">
+
+						<div class="summernote" id="content">
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="mail-body text-right tooltip-demo">
+						<a id="sendBtn" href="javascript:void(0);" class="btn btn-sm btn-primary"
+							data-toggle="tooltip" data-placement="top" title="发送邮件"><i
+							class="fa fa-reply"></i> 发送</a> <a href="mail_compose.html" class="btn btn-white btn-sm"
+							data-toggle="tooltip" data-placement="top" title="Discard email"><i
+							class="fa fa-times"></i> 放弃</a> <a href="javascript:void(0);"
+							onclick="saveDraft()"
+							class="btn btn-white btn-sm" data-toggle="tooltip"
+							data-placement="top" title="Move to draft folder"><i
+							class="fa fa-pencil"></i> 存为草稿</a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var folderMap = {
+			"收件箱": "INBOX",
+			"发信": "SENT",
+			"重要": "IMPORTANT",
+			"草稿": "DRAFT",
+			"垃圾箱": "TRASH"
+		};
+
+		function normalizeMailContent(value) {
+			if (value === null || value === undefined) {
+				return "";
+			}
+			if (typeof value === "string") {
+				var trimmed = value.trim();
+				if (trimmed && (trimmed.charAt(0) === "{" || trimmed.charAt(0) === "[")) {
+					try {
+						return normalizeMailContent(JSON.parse(trimmed));
+					} catch (e) {}
+				}
+				return value;
+			}
+			if (typeof value === "object") {
+				if (typeof value.content === "string") {
+					return value.content;
+				}
+				if (typeof value.text === "string") {
+					return value.text;
+				}
+				if (typeof value.value === "string") {
+					return value.value;
+				}
+				try {
+					return JSON.stringify(value);
+				} catch (e2) {
+					return String(value);
+				}
+			}
+			return String(value);
+		}
+
+		function toSafeText(value) {
+			if (typeof value === "object") {
+				return normalizeMailContent(value).replace(/</g, "&lt;").replace(/>/g, "&gt;");
+			}
+			return String(value || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+		}
+
+		function buildRows(mailList, folderKey) {
+			if (!mailList || mailList.length === 0) {
+				return '<div class="text-center text-muted">暂无邮件记录</div>';
+			}
+			var html = "";
+			for (var i = 0; i < mailList.length; i++) {
+				var mail = mailList[i];
+				var sendTime = mail.sendTime ? new Date(mail.sendTime).toLocaleString() : "--";
+				
+				// 针对 content 可能存的是字符串 '[object Object]' 或序列化后的 JSON 字符串做强力解构
+				var rawContent = mail.content || "";
+				if (typeof rawContent === 'string' && rawContent.indexOf('[object Object]') > -1) {
+					rawContent = "无有效正文内容";
+				} else if (typeof rawContent === 'string' && (rawContent.charAt(0) === "{" || rawContent.charAt(0) === "[")) {
+					try {
+						var parsed = JSON.parse(rawContent);
+						rawContent = normalizeMailContent(parsed);
+					} catch(e) {}
+				}
+				
+				var content = toSafeText(rawContent).replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim().substring(0, 80);
+				var toEmail = toSafeText(mail.toEmail || "--");
+				var subject = toSafeText(mail.subject || "(无主题)");
+				var actions = "";
+				if (folderKey !== "TRASH") {
+					actions = '<button type="button" class="btn btn-xs btn-danger pull-right" onclick="moveToTrash(' + mail.id + ')">移到垃圾箱</button>';
+				}
+				html += '<div class="list-group-item">' +
+					'<h5 class="mb-1">' + subject + actions + '</h5>' +
+					'<p class="mb-1">' + content + '</p>' +
+					'<small>收件人: ' + toEmail + ' | 时间: ' + sendTime + ' | 状态: ' + toSafeText(mail.status) + '</small>' +
+					'</div>';
+			}
+			return html;
+		}
+
+		function renderFolder(folderName, folderKey, mailList) {
+			var html = '<div class="mail-content p-4">' +
+				'<h3 class="text-center mb-4">' + folderName + '</h3>' +
+				'<div class="list-group">' + buildRows(mailList, folderKey) + '</div>' +
+				'</div>';
+			$('.mail-box').html(html);
+		}
+
+		function loadFolder(folderName) {
+			var folderKey = folderMap[folderName] || "SENT";
+			$('.mail-box-header h2').text(folderName);
+			$('.mail-box').html('<div class="mail-content p-4 text-center"><i class="fa fa-spinner fa-spin fa-2x"></i><p>加载中...</p></div>');
+			fetch("../../other/getMailHistory.do?folder=" + encodeURIComponent(folderKey), { credentials: "include" })
+				.then(function(resp) { return resp.json(); })
+				.then(function(res) {
+					if (res && res.status === 200) {
+						renderFolder(folderName, folderKey, res.data || []);
+						return;
+					}
+					alert("加载失败：" + (res.msg || "未知错误"));
+				})
+				.catch(function() {
+					alert("加载失败，请稍后重试");
+				});
+		}
+
+		var isSending = false;
+		function sendEmail() {
+			if (isSending) return;
+			var $btn = $("#sendBtn");
+			
+			var to = $("#to").val();
+			var subject = $("#subject").val();
+			var content = getEditorContent();
+			
+			if (!to || !subject || !content || content === '<p><br></p>') {
+				showMailStatus("请填写完整的邮件信息", false);
+				alert("请填写完整的邮件信息");
+				return;
+			}
+			
+			isSending = true;
+			$btn.css("pointer-events", "none").text("发送中...");
+			
+			var body = new URLSearchParams();
+			body.append("to", to);
+			body.append("subject", subject);
+			body.append("content", content);
+			fetch("../../other/sendEmail.do", {
+				method: "POST",
+				credentials: "include",
+				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" },
+				body: body.toString()
+			})
+			.then(function(resp) { return resp.text(); })
+			.then(function(raw) {
+				isSending = false;
+				$btn.css("pointer-events", "auto").html('<i class="fa fa-reply"></i> 发送');
+				var res = null;
+				try { res = JSON.parse(raw); } catch (e) { res = raw; }
+				if (typeof res === "string") {
+					showMailStatus("发送失败：登录状态已失效，请重新登录后重试", false);
+					alert("发送失败：登录状态已失效，请重新登录后重试");
+					return;
+				}
+				if (res && res.status === 200) {
+					showMailStatus("邮件发送成功", true);
+					alert("邮件发送成功");
+					$("#to").val("");
+					$("#subject").val("");
+					setEditorContent("");
+					loadFolder("发信");
+				} else {
+					showMailStatus("邮件发送失败：" + (res.msg || "请检查SMTP配置"), false);
+					alert("邮件发送失败：" + (res.msg || "请检查SMTP配置"));
+				}
+			})
+			.catch(function() {
+				isSending = false;
+				$btn.css("pointer-events", "auto").html('<i class="fa fa-reply"></i> 发送');
+				showMailStatus("邮件发送失败，请稍后重试", false);
+				alert("邮件发送失败，请稍后重试");
+			});
+		}
+
+		function saveDraft() {
+			var to = $("#to").val();
+			var subject = $("#subject").val();
+			var content = getEditorContent();
+			var body = new URLSearchParams();
+			body.append("to", to);
+			body.append("subject", subject);
+			body.append("content", content);
+			fetch("../../other/saveDraft.do", {
+				method: "POST",
+				credentials: "include",
+				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" },
+				body: body.toString()
+			})
+			.then(function(resp) { return resp.json(); })
+			.then(function(res) {
+				if (res && res.status === 200) {
+					showMailStatus("草稿已保存", true);
+					alert("草稿已保存");
+					loadFolder("草稿");
+				} else {
+					showMailStatus("草稿保存失败：" + (res.msg || "未知错误"), false);
+					alert("草稿保存失败：" + (res.msg || "未知错误"));
+				}
+			})
+			.catch(function() {
+				showMailStatus("草稿保存失败", false);
+				alert("草稿保存失败");
+			});
+		}
+
+		function moveToTrash(id) {
+			var body = new URLSearchParams();
+			body.append("id", id);
+			fetch("../../other/moveToTrash.do", {
+				method: "POST",
+				credentials: "include",
+				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" },
+				body: body.toString()
+			})
+			.then(function(resp) { return resp.json(); })
+			.then(function(res) {
+				if (res && res.status === 200) {
+					alert("已移到垃圾箱");
+					loadFolder("发信");
+				}
+			});
+		}
+
+		function showFolder(folder) {
+			loadFolder(folder);
+		}
+
+		function showMailStatus(msg, ok) {
+			var box = $("#mailStatus");
+			box.removeClass("alert-success alert-danger").addClass(ok ? "alert-success" : "alert-danger");
+			box.text(msg).show();
+		}
+
+		function getEditorContent() {
+			var val = "";
+			var $editable = $('.note-editable');
+			if ($editable.length > 0) {
+				val = $editable.html();
+				if (typeof val === 'string' && val.trim() !== '') return val;
+			}
+			
+			var htmlVal = $('.summernote').html();
+			if (typeof htmlVal === 'string' && htmlVal.trim() !== '') {
+			    return htmlVal;
+			}
+			
+			try {
+				val = $('.summernote').summernote('code');
+				if (typeof val === 'string' && val.trim() !== '') return val;
+			} catch (e) {}
+			try {
+				val = $('.summernote').code();
+				if (typeof val === 'string' && val.trim() !== '') return val;
+			} catch (e) {}
+			return "无内容";
+		}
+
+		function setEditorContent(value) {
+			var $editable = $('.note-editable');
+			if ($editable.length > 0) {
+				$editable.html(value || "");
+				return;
+			}
+			try {
+				$('.summernote').summernote('code', value || "");
+			} catch (e) {
+				try {
+					$('.summernote').code(value || "");
+				} catch (e2) {
+					console.error(e2);
+				}
+			}
+		}
+
+		function loadEmailConfig() {
+			fetch("../../other/getEmailConfig.do", { credentials: "include" })
+				.then(function(resp) { return resp.json(); })
+				.then(function(res) {
+					if (res && res.status === 200 && res.data) {
+						$("#smtpServer").val(res.data.smtpServer || "");
+						$("#smtpUsername").val(res.data.smtpUsername || "");
+						$("#smtpPassword").val(res.data.smtpPassword || "");
+						$("#smtpFrom").val(res.data.smtpFrom || "");
+					}
+				});
+		}
+
+		function saveEmailConfig() {
+			var body = new URLSearchParams();
+			body.append("smtpServer", $("#smtpServer").val());
+			body.append("smtpUsername", $("#smtpUsername").val());
+			body.append("smtpPassword", $("#smtpPassword").val());
+			body.append("smtpFrom", $("#smtpFrom").val());
+			fetch("../../other/saveEmailConfig.do", {
+				method: "POST",
+				credentials: "include",
+				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" },
+				body: body.toString()
+			})
+			.then(function(resp) { return resp.json(); })
+			.then(function(res) {
+				if (res && res.status === 200) {
+					showMailStatus("SMTP配置保存成功", true);
+				} else {
+					showMailStatus("SMTP配置保存失败：" + (res.msg || "未知错误"), false);
+				}
+			})
+			.catch(function() {
+				showMailStatus("SMTP配置保存失败，请重试", false);
+			});
+		}
+	</script>
+	<script src="../js/jquery.min.js?v=2.1.4"></script>
+	<script src="../js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="../js/content.min.js?v=1.0.0"></script>
+	<script src="../js/plugins/iCheck/icheck.min.js"></script>
+	<script src="../js/plugins/summernote/summernote.min.js"></script>
+	<script src="../js/plugins/summernote/summernote-zh-CN.js"></script>
+	<script>
+		$(document).ready(function() {
+			$(".i-checks").iCheck({
+				checkboxClass : "icheckbox_square-green",
+				radioClass : "iradio_square-green",
+			});
+			$(".summernote").summernote({
+				lang : "zh-CN"
+			});
+			$("#mailForm").on("submit", function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				sendEmail();
+				return false;
+			});
+			$("#sendBtn").off("click").on("click", function(e) {
+				e.preventDefault();
+				e.stopImmediatePropagation();
+				sendEmail();
+				return false;
+			});
+			loadEmailConfig();
+		});
+	</script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/mail_compose.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:15 GMT -->
+</html>

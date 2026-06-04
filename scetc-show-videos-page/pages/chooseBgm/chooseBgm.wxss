@@ -1,0 +1,309 @@
+page {
+  height: 100%;
+  background: #f8f9fa;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+}
+
+.page {
+  min-height: 100%;
+  padding-bottom: 40rpx;
+}
+
+.page-title {
+  padding: 28rpx 40rpx 8rpx;
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #111111;
+}
+
+.uploadBgmBar {
+  padding: 32rpx 40rpx;
+}
+
+.uploadBgmBtn {
+  width: 100%;
+  background: #ffffff;
+  color: #1a1a1a;
+  border-radius: 100rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+  height: 88rpx;
+  line-height: 88rpx;
+  border: 2rpx solid #e5e5e5;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.02);
+  transition: all 0.3s;
+}
+
+.uploadBgmBtn::after {
+  border: none;
+}
+
+/* BGM 列表容器 */
+.bgm-panel {
+  margin: 0 32rpx 24rpx;
+  background: #ffffff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.03);
+}
+
+.bgm-panel-head {
+  padding: 28rpx 28rpx 12rpx;
+}
+
+.bgm-panel-title {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #111111;
+}
+
+.bgm-panel-tip {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: #8b8b8b;
+}
+
+.bgm-origin {
+  margin: 0 24rpx 16rpx;
+  padding: 22rpx 24rpx;
+  border-radius: 20rpx;
+  background: #f7f7f8;
+  border: 2rpx solid transparent;
+}
+
+.bgm-origin-active {
+  background: #eef4ff;
+  border-color: #3f8cff;
+}
+
+.bgm-origin-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1d2a42;
+}
+
+.bgm-origin-desc {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: #8d96a8;
+}
+
+.bgm-scroll {
+  max-height: 380rpx;
+}
+
+.bgm-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 32rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.bgm-item-active {
+  background: #f7faff;
+}
+
+.bgm-item:last-child {
+  border-bottom: none;
+}
+
+.bgm-play {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 24rpx;
+  background: #f1f3f7;
+  color: #556070;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.bgm-play-active {
+  background: #111111;
+  color: #ffffff;
+}
+
+.bgm-content {
+  flex: 1;
+  margin: 0 20rpx;
+  min-width: 0;
+}
+
+.bgm-name {
+  display: block;
+  font-size: 28rpx;
+  color: #111111;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bgm-author {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  color: #969696;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bgm-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16rpx;
+}
+
+.bgm-time {
+  font-size: 22rpx;
+  color: #7b8394;
+}
+
+.bgm-check {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  border: 2rpx solid #d7dce5;
+  background: #ffffff;
+}
+
+.bgm-check-active {
+  background: #3f8cff;
+  border-color: #3f8cff;
+}
+
+.bgm-empty {
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+  padding: 40rpx 0;
+}
+
+/* 输入框行组 */
+.inputView {
+  margin: 32rpx;
+  padding: 32rpx;
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.03);
+  display: flex;
+  align-items: center;
+}
+
+.inputView-column {
+  display: block;
+}
+
+.field-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.loginLabel {
+  color: #1a1a1a;
+  font-size: 28rpx;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.field-tip {
+  font-size: 22rpx;
+  color: #999999;
+}
+
+.inputText {
+  width: 100%;
+  font-size: 28rpx;
+  color: #333333;
+  text-align: left;
+  min-height: 60rpx;
+}
+
+.inputText-placeholder {
+  color: #999999;
+}
+
+/* 分类选择美化 */
+.category-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.category-radio {
+  display: flex;
+  align-items: center;
+  background: #f5f6f8;
+  padding: 12rpx 24rpx;
+  border-radius: 100rpx;
+  transition: all 0.3s;
+  border: 2rpx solid transparent;
+}
+
+.category-radio.checked {
+  background: #edf2ff;
+  border-color: #3f8cff;
+}
+
+.category-radio checkbox,
+.category-radio radio {
+  display: none;
+}
+
+.category-text {
+  font-size: 26rpx;
+  color: #666666;
+}
+
+.category-radio.checked .category-text {
+  color: #3f8cff;
+  font-weight: 500;
+}
+
+/* 底部操作按钮 */
+.action-btns {
+  padding: 16rpx 32rpx 48rpx;
+  display: flex;
+  gap: 24rpx;
+}
+
+.submitBtn {
+  flex: 1;
+  background: #222222 !important;
+  color: #ffffff !important;
+  border-radius: 100rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  height: 96rpx;
+  line-height: 96rpx;
+  margin: 0 !important;
+  box-shadow: 0 12rpx 24rpx rgba(0, 0, 0, 0.1);
+}
+
+.gobackBtn {
+  width: 160rpx !important;
+  background: #f5f5f5 !important;
+  color: #666666 !important;
+  border-radius: 100rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  height: 96rpx;
+  line-height: 96rpx;
+  margin: 0 !important;
+}
+
+.submitBtn::after, .gobackBtn::after {
+  border: none;
+}

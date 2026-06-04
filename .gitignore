@@ -1,0 +1,53 @@
+# Build output
+target/
+**/target/
+*.class
+*.war
+*.ear
+
+# Keep Maven wrapper jars
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+!**/.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+.metadata/
+.settings/
+.classpath
+.project
+*.iml
+*.ipr
+*.iws
+.apt_generated/
+.factorypath
+.springBeans
+.sts4-cache/
+
+# Local config and private files
+project.private.config.json
+*.local
+.env
+.env.*
+!.env.example
+
+# Runtime uploads and generated media
+.runtime-upload/
+runtime-upload/
+uploads/
+logs/
+*.log
+*.tmp
+*.mp4
+*.mp3
+
+# Personal docs not required for source display
+aricle/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local-only utility with SMS credentials in some environments
+src/main/java/com/show/admin/scetc/utils/SMSUtils.java
+

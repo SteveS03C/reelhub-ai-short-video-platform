@@ -1,0 +1,33 @@
+<form bindsubmit='doReport'>
+  <view class="report-page">
+  <view class="report-head">
+    <view class="report-title">举报视频</view>
+    <view class="report-subtitle">请选择举报类型，并补充问题描述，管理员会在后台进行处理。</view>
+  </view>
+
+  <view class="section">
+    <view class="section__title"></view>
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+      <view class="picker">
+        <view><text>举报类型:</text><text class="picker-value">{{array[index]}}</text></view>
+      </view>
+    </picker>
+  </view>
+
+  <view class="section content">
+    <textarea
+      maxlength="100"
+      name="reportContent"
+      value="{{content}}"
+      placeholder="请简要描述举报原因，100字内"
+      auto-height="true"
+      cursor-spacing="24"
+      bindinput="handleContentInput"></textarea>
+  </view>
+  <text wx:if="{{isContentError}}" class='error-message'>{{errorMessage}}</text>
+  <view class="post">
+    <button bindtap="cancel">取消</button>
+    <button form-type='submit' loading="{{submitting}}" disabled="{{submitting}}">提交</button>
+  </view>
+  </view>
+</form>
