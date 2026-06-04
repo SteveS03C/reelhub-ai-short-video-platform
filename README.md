@@ -106,23 +106,15 @@ ReelHub 是一个面向短视频创作、浏览与互动的微信小程序 + Jav
 └── myimg                          # 项目截图与架构图
 ```
 
-## 效果展示
+## 运行截图
 
-### 小程序端
+### 后台登录页
 
-![小程序演示 1](gif/show01.gif)
+![ReelHub 后台登录页](docs/screenshots/reelhub-admin-login.png)
 
-![小程序演示 2](gif/show02.gif)
+### 后台管理首页
 
-### 后台管理系统
-
-![后台管理系统](myimg/backgroud.png)
-
-### 数据库与架构设计
-
-![数据库 ER 图](myimg/er.png)
-
-![系统架构图](myimg/a3.jpg)
+![ReelHub 后台管理首页](docs/screenshots/reelhub-admin-dashboard.png)
 
 ## 环境要求
 
@@ -272,4 +264,3 @@ scetc-show-videos-page/app.js
 - 增加 Docker Compose，一键启动 MySQL、Redis 和后端服务。
 - 增加短视频推荐、标签体系和搜索排序能力。
 - 将 AI 视频问答能力扩展为自动标题、摘要和标签生成。
-
